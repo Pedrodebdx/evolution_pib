@@ -9,8 +9,8 @@ print(df2)
 print(df1)
 
 # distinction des pays et des aggreations
-df1['aggregate'] = FALSE
-df2['aggregate'] = TRUE
+df1['aggregate'] = TRUE
+df2['aggregate'] = FALSE
 
 
 # concatenation 

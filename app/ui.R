@@ -14,27 +14,44 @@ shinyUI(fluidPage(
     
     navbarPage("Projet 6",
                # Onglet 1 : Le graph interactif
-               tabPanel("Graph interactif",
-                        titlePanel("Graphique"),
-                        
-                        #Sidebar
-                        sidebarLayout(
-                            sidebarPanel(
+              tabPanel("Graph interactif",
+                                titlePanel("Graphique"),
                                 
-                            ),
-                            mainPanel(
-                                
-                            )
-                        )
+                                #Sidebar
+                                sidebarLayout(
+                                  sidebarPanel(
+                                    selectInput(inputId = "data1", label = "Selectionner Pays ou Aggregat", choices = c("Pays", "Aggregat")),
+                                    uiOutput("names"),
+                                    checkboxInput(inputId = "compare", label = "Ajouter variable ?", value = 0),
+                                    
+                                    conditionalPanel(
+                                      condition = "input.compare == 1",
+                                      selectInput(inputId = "data2", label = "Selectionner Pays ou Aggregat", choices = c("Pays", "Aggregat")),
+                                      uiOutput("names2")
+                                    ),
+                                    actionButton("action", label = "Action")
+                                    
+                                  ),
+                                  mainPanel(
+                                    plotOutput("plot")
+                                  )
+                                )
                ),
                tabPanel("Dataset",
                         titlePanel("Dataset"),
                         
                         #Sidebar
                         sidebarLayout(
+                          
+                            
                             sidebarPanel(
-                                
-                            ),
+                              
+                              
+                              
+                              
+                              
+                              h2("Prévision d'évolution du PIB"),
+                                         DT::dataTableOutput("mytable")),
                             mainPanel(
                                 
                             )
