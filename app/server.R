@@ -13,9 +13,24 @@ library(shiny)
 shinyServer(function(input, output) {# partie Graph
     
     
-output$mytable = DT::renderDataTable({
+    output$mytable = DT::renderDataTable({
         df    
-})   
+    })   
+    
+    
+    
+    output$all_names <- renderUI({
+        selectInput("all_names","Selectionner la variable:", choices = df['pays Name'])
+    })
+    output$resume <- renderText({
+        moy = mean(as.numeric(df[df['pays Name']==input$all_names, 3:8]))
+        moy = round(moy,2)
+        paste("La moyenne de",input$all_names, "sur la période est de:", moy,"%")
+    })
+    
+    
+    
+    
     
     var <- reactive({
         switch(input$data1,
